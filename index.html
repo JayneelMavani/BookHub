@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub - Crowdsourced Book Recommendations</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for stars -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-reader"></i> BookHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-book.html">Add Recommendation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                </ul>
+                <!-- Search Bar -->
+                <form class="d-flex ms-3" id="navSearchForm">
+                    <input class="form-control me-2" type="text" id="navSearchInput" placeholder="Search books...">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner bg-primary text-white py-5">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Welcome to BookHub</h1>
+            <p class="lead mb-4">Discover amazing books recommended by the community. Share your favorite reads and join book lovers worldwide.</p>
+            <a href="books.html" class="btn btn-light btn-lg me-2">Browse Books</a>
+            <a href="add-book.html" class="btn btn-outline-light btn-lg">Add Your Recommendation</a>
+        </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Featured Books</h2>
+            <div id="featuredBooks" class="row g-4">
+                <!-- Featured books will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Books Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Popular Books</h2>
+            <div id="popularBooks" class="row g-4">
+                <!-- Popular books will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="cta-section bg-primary text-white py-5 mt-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Have a Book to Recommend?</h2>
+            <p class="lead mb-4">Share your favorite books with our community and help others discover great reads!</p>
+            <a href="add-book.html" class="btn btn-light btn-lg">Add Your Book Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About BookHub</h5>
+                    <p>A community-driven platform for discovering and sharing the best books.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">Home</a></li>
+                        <li><a href="books.html" class="text-white-50">Books</a></li>
+                        <li><a href="about.html" class="text-white-50">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p class="text-white-50">Email: info@bookhub.com</p>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center text-white-50">
+                <p>&copy; 2026 BookHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script>
+        // Load featured and popular books on home page
+        $(document).ready(function() {
+            loadFeaturedBooks();
+            loadPopularBooks();
+        });
+
+        function loadFeaturedBooks() {
+            const books = getAllBooks();
+            const featured = books.slice(0, 3);
+            renderBooks(featured, '#featuredBooks');
+        }
+
+        function loadPopularBooks() {
+            const books = getAllBooks();
+            const popular = books.sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 6);
+            renderBooks(popular, '#popularBooks');
+        }
+
+        function renderBooks(books, containerId) {
+            const container = $(containerId);
+            container.empty();
+
+            books.forEach(book => {
+                const bookCard = `
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card book-card h-100">
+                            <img src="${book.imageUrl || 'https://via.placeholder.com/300x400?text=Book+Cover'}" class="card-img-top book-cover" alt="${book.title}">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${book.title}</h5>
+                                <p class="card-text text-muted">by ${book.author}</p>
+                                <p class="card-text"><small class="text-secondary">Genre: ${book.genre}</small></p>
+                                <div class="mb-3">
+                                    <span class="badge bg-warning text-dark">${(book.rating || 0).toFixed(1)} ⭐</span>
+                                </div>
+                                <a href="book-detail.html?id=${book.id}" class="btn btn-primary mt-auto">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.append(bookCard);
+            });
+        }
+
+        // Handle navigation search
+        $('#navSearchForm').on('submit', function(e) {
+            e.preventDefault();
+            const query = $('#navSearchInput').val();
+            if (query) {
+                window.location.href = `books.html?search=${encodeURIComponent(query)}`;
+            }
+        });
+    </script>
+</body>
+</html>

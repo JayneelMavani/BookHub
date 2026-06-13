@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - BookHub</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-reader"></i> BookHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Login Prompt (shown when not logged in) -->
+            <div id="loginPrompt" class="alert alert-info text-center d-none">
+                <h4>You are not logged in</h4>
+                <p>Please <a href="login.html">login</a> or <a href="register.html">register</a> to see your profile.</p>
+            </div>
+
+            <!-- User Profile (shown when logged in) -->
+            <div id="profileContent" class="d-none">
+                <!-- Profile Header -->
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-body p-5">
+                        <div class="row align-items-center">
+                            <div class="col-md-3 text-center">
+                                <div class="profile-avatar mb-3">
+                                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <h1 id="userName"></h1>
+                                <p class="text-muted mb-2">
+                                    Email: <strong id="userEmail"></strong>
+                                </p>
+                                <p class="text-muted mb-3">
+                                    Member since: <strong id="memberSince"></strong>
+                                </p>
+                                <div>
+                                    <button id="logoutBtn" class="btn btn-outline-danger me-2">Logout</button>
+                                    <a href="add-book.html" class="btn btn-primary">Add Book</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h3 class="card-title text-primary" id="booksAddedCount">0</h3>
+                                <p class="text-muted">Books Added</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h3 class="card-title text-success" id="reviewsSubmittedCount">0</h3>
+                                <p class="text-muted">Reviews Submitted</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h3 class="card-title text-warning" id="avgRatingCount">0</h3>
+                                <p class="text-muted">Average Rating Given</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-light">
+                        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="booksTab" data-bs-toggle="tab" href="#booksContent" role="tab">My Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="reviewsTab" data-bs-toggle="tab" href="#reviewsContent" role="tab">My Reviews</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- My Books Tab -->
+                            <div class="tab-pane fade show active" id="booksContent" role="tabpanel">
+                                <h5 class="mb-4">Books You've Recommended</h5>
+                                <div id="userBooksContainer" class="row g-4">
+                                    <!-- User books will be displayed here -->
+                                </div>
+                                <div id="noBooksMessage" class="alert alert-info text-center d-none">
+                                    <p>You haven't added any books yet. <a href="add-book.html">Add your first book!</a></p>
+                                </div>
+                            </div>
+
+                            <!-- My Reviews Tab -->
+                            <div class="tab-pane fade" id="reviewsContent" role="tabpanel">
+                                <h5 class="mb-4">Reviews You've Submitted</h5>
+                                <div id="userReviewsContainer">
+                                    <!-- User reviews will be displayed here -->
+                                </div>
+                                <div id="noReviewsMessage" class="alert alert-info text-center d-none">
+                                    <p>You haven't submitted any reviews yet. <a href="books.html">Browse books and add reviews!</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About BookHub</h5>
+                    <p>A community-driven platform for discovering and sharing the best books.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">Home</a></li>
+                        <li><a href="books.html" class="text-white-50">Books</a></li>
+                        <li><a href="about.html" class="text-white-50">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p class="text-white-50">Email: info@bookhub.com</p>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center text-white-50">
+                <p>&copy; 2026 BookHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script>
+        let currentUser = null;
+
+        $(document).ready(function() {
+            checkUserLogin();
+            if (currentUser) {
+                loadUserProfile();
+                loadUserBooks();
+                loadUserReviews();
+            }
+
+            $('#logoutBtn').on('click', logout);
+        });
+
+        function checkUserLogin() {
+            currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) {
+                $('#loginPrompt').removeClass('d-none');
+                $('#profileContent').addClass('d-none');
+            } else {
+                $('#loginPrompt').addClass('d-none');
+                $('#profileContent').removeClass('d-none');
+            }
+        }
+
+        function loadUserProfile() {
+            $('#userName').text(currentUser.name);
+            $('#userEmail').text(currentUser.email);
+            $('#memberSince').text(new Date(currentUser.createdAt).toLocaleDateString());
+        }
+
+        function loadUserBooks() {
+            const userBooksIds = JSON.parse(localStorage.getItem(`userBooks_${currentUser.id}`)) || [];
+            const allBooks = getAllBooks();
+            const userBooks = allBooks.filter(b => userBooksIds.includes(b.id));
+
+            const container = $('#userBooksContainer');
+            container.empty();
+
+            if (userBooks.length === 0) {
+                $('#noBooksMessage').removeClass('d-none');
+                return;
+            }
+
+            $('#noBooksMessage').addClass('d-none');
+            $('#booksAddedCount').text(userBooks.length);
+
+            userBooks.forEach(book => {
+                const bookCard = `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card book-card h-100">
+                            <img src="${book.imageUrl || 'https://via.placeholder.com/300x400?text=Book+Cover'}" class="card-img-top book-cover" alt="${book.title}">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${book.title}</h5>
+                                <p class="card-text text-muted">by ${book.author}</p>
+                                <p class="card-text"><small class="text-secondary">Genre: ${book.genre}</small></p>
+                                <div class="mb-3">
+                                    <span class="badge bg-warning text-dark">${(book.rating || 0).toFixed(1)} ⭐</span>
+                                </div>
+                                <a href="book-detail.html?id=${book.id}" class="btn btn-primary mt-auto">View</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.append(bookCard);
+            });
+        }
+
+        function loadUserReviews() {
+            const allBooks = getAllBooks();
+            let userReviews = [];
+
+            // Collect all reviews from all books
+            allBooks.forEach(book => {
+                const reviews = JSON.parse(localStorage.getItem(`reviews_${book.id}`)) || [];
+                const userBookReviews = reviews.filter(r => r.author === currentUser.name);
+                userBookReviews.forEach(review => {
+                    userReviews.push({
+                        ...review,
+                        bookTitle: book.title,
+                        bookId: book.id
+                    });
+                });
+            });
+
+            // Sort by date (newest first)
+            userReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const container = $('#userReviewsContainer');
+            container.empty();
+
+            if (userReviews.length === 0) {
+                $('#noReviewsMessage').removeClass('d-none');
+                return;
+            }
+
+            $('#noReviewsMessage').addClass('d-none');
+            $('#reviewsSubmittedCount').text(userReviews.length);
+
+            // Calculate average rating
+            const avgRating = userReviews.reduce((sum, r) => sum + r.rating, 0) / userReviews.length;
+            $('#avgRatingCount').text(avgRating.toFixed(1));
+
+            userReviews.forEach(review => {
+                const reviewDiv = `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="card-subtitle mb-1">
+                                        <a href="book-detail.html?id=${review.bookId}" class="text-decoration-none">
+                                            ${review.bookTitle}
+                                        </a>
+                                    </h6>
+                                    <small class="text-muted">${new Date(review.date).toLocaleDateString()}</small>
+                                </div>
+                                <div class="text-warning">
+                                    ${'⭐'.repeat(review.rating)}
+                                </div>
+                            </div>
+                            <p class="card-text">${review.text}</p>
+                        </div>
+                    </div>
+                `;
+                container.append(reviewDiv);
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

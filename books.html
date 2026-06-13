@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books - BookHub</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-reader"></i> BookHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="books.html">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-book.html">Add Recommendation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+                <!-- Search Bar -->
+                <form class="d-flex ms-3" id="navSearchForm">
+                    <input class="form-control me-2" type="text" id="navSearchInput" placeholder="Search books...">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Books Section -->
+    <section class="py-5">
+        <div class="container">
+            <h1 class="mb-4">Book Collections</h1>
+
+            <!-- Filter Section -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Filters</h5>
+                            
+                            <!-- Search Input -->
+                            <div class="mb-3">
+                                <label for="searchInput" class="form-label">Search</label>
+                                <input type="text" class="form-control" id="searchInput" placeholder="Title, Author...">
+                            </div>
+
+                            <!-- Genre Filter -->
+                            <div class="mb-3">
+                                <label for="genreFilter" class="form-label">Genre</label>
+                                <select class="form-select" id="genreFilter">
+                                    <option value="">All Genres</option>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Mystery">Mystery</option>
+                                    <option value="Science Fiction">Science Fiction</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Non-Fiction">Non-Fiction</option>
+                                    <option value="Biography">Biography</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Thriller">Thriller</option>
+                                    <option value="Self-Help">Self-Help</option>
+                                </select>
+                            </div>
+
+                            <!-- Rating Filter -->
+                            <div class="mb-3">
+                                <label for="ratingFilter" class="form-label">Minimum Rating</label>
+                                <select class="form-select" id="ratingFilter">
+                                    <option value="">All Ratings</option>
+                                    <option value="5">5 Stars</option>
+                                    <option value="4">4+ Stars</option>
+                                    <option value="3">3+ Stars</option>
+                                    <option value="2">2+ Stars</option>
+                                </select>
+                            </div>
+
+                            <!-- Sort By -->
+                            <div class="mb-3">
+                                <label for="sortBy" class="form-label">Sort By</label>
+                                <select class="form-select" id="sortBy">
+                                    <option value="latest">Latest Added</option>
+                                    <option value="rating">Highest Rated</option>
+                                    <option value="title">Title (A-Z)</option>
+                                </select>
+                            </div>
+
+                            <button id="resetFilters" class="btn btn-outline-secondary w-100">Reset Filters</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Books Grid -->
+                <div class="col-md-9">
+                    <div id="booksContainer" class="row g-4">
+                        <!-- Books will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <!-- No Results Message -->
+                    <div id="noResults" class="alert alert-info text-center d-none">
+                        <p>No books found matching your criteria. <a href="add-book.html">Add one now!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About BookHub</h5>
+                    <p>A community-driven platform for discovering and sharing the best books.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">Home</a></li>
+                        <li><a href="books.html" class="text-white-50">Books</a></li>
+                        <li><a href="about.html" class="text-white-50">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p class="text-white-50">Email: info@bookhub.com</p>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center text-white-50">
+                <p>&copy; 2026 BookHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script>
+        $(document).ready(function() {
+            loadBooks();
+            setupFilterListeners();
+            handleSearchQuery();
+        });
+
+        function loadBooks() {
+            const books = getAllBooks();
+            displayBooks(books);
+        }
+
+        function displayBooks(books) {
+            const container = $('#booksContainer');
+            container.empty();
+
+            if (books.length === 0) {
+                $('#noResults').removeClass('d-none');
+                return;
+            } else {
+                $('#noResults').addClass('d-none');
+            }
+
+            books.forEach(book => {
+                const bookCard = `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card book-card h-100">
+                            <img src="${book.imageUrl || 'https://via.placeholder.com/300x400?text=Book+Cover'}" class="card-img-top book-cover" alt="${book.title}">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${book.title}</h5>
+                                <p class="card-text text-muted">by ${book.author}</p>
+                                <p class="card-text"><small class="text-secondary">Genre: ${book.genre}</small></p>
+                                <div class="mb-3">
+                                    <span class="badge bg-warning text-dark">${(book.rating || 0).toFixed(1)} ⭐</span>
+                                    <span class="badge bg-secondary">${book.reviewCount || 0} reviews</span>
+                                </div>
+                                <a href="book-detail.html?id=${book.id}" class="btn btn-primary mt-auto">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.append(bookCard);
+            });
+        }
+
+        function setupFilterListeners() {
+            $('#searchInput, #genreFilter, #ratingFilter, #sortBy').on('change keyup', applyFilters);
+            $('#resetFilters').on('click', resetFilters);
+            $('#navSearchForm').on('submit', function(e) {
+                e.preventDefault();
+                const query = $('#navSearchInput').val();
+                if (query) {
+                    $('#searchInput').val(query);
+                    applyFilters();
+                }
+            });
+        }
+
+        function applyFilters() {
+            let books = getAllBooks();
+            const search = $('#searchInput').val().toLowerCase();
+            const genre = $('#genreFilter').val();
+            const rating = parseFloat($('#ratingFilter').val()) || 0;
+            const sortBy = $('#sortBy').val();
+
+            // Apply filters
+            books = books.filter(book => {
+                const matchSearch = !search || 
+                    book.title.toLowerCase().includes(search) || 
+                    book.author.toLowerCase().includes(search);
+                const matchGenre = !genre || book.genre === genre;
+                const matchRating = (book.rating || 0) >= rating;
+
+                return matchSearch && matchGenre && matchRating;
+            });
+
+            // Apply sorting
+            if (sortBy === 'rating') {
+                books.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+            } else if (sortBy === 'title') {
+                books.sort((a, b) => a.title.localeCompare(b.title));
+            } else {
+                books.sort((a, b) => b.id - a.id);
+            }
+
+            displayBooks(books);
+        }
+
+        function resetFilters() {
+            $('#searchInput').val('');
+            $('#genreFilter').val('');
+            $('#ratingFilter').val('');
+            $('#sortBy').val('latest');
+            loadBooks();
+        }
+
+        function handleSearchQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const search = params.get('search');
+            if (search) {
+                $('#searchInput').val(search);
+                applyFilters();
+            }
+        }
+    </script>
+</body>
+</html>

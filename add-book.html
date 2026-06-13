@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book Recommendation - BookHub</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-reader"></i> BookHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="add-book.html">Add Recommendation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Add Book Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-7">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-5">
+                            <h2 class="card-title mb-4">Add Your Book Recommendation</h2>
+                            <p class="text-muted mb-4">Share a great book with our community. Fill out the form below.</p>
+
+                            <form id="addBookForm" novalidate>
+                                <!-- Book Title -->
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Book Title <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="title" name="title" required>
+                                    <div class="invalid-feedback">
+                                        Book title is required.
+                                    </div>
+                                </div>
+
+                                <!-- Author -->
+                                <div class="mb-3">
+                                    <label for="author" class="form-label">Author <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="author" name="author" required>
+                                    <div class="invalid-feedback">
+                                        Author name is required.
+                                    </div>
+                                </div>
+
+                                <!-- Genre -->
+                                <div class="mb-3">
+                                    <label for="genre" class="form-label">Genre <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="genre" name="genre" required>
+                                        <option value="">Select a Genre</option>
+                                        <option value="Fiction">Fiction</option>
+                                        <option value="Mystery">Mystery</option>
+                                        <option value="Science Fiction">Science Fiction</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Non-Fiction">Non-Fiction</option>
+                                        <option value="Biography">Biography</option>
+                                        <option value="Fantasy">Fantasy</option>
+                                        <option value="Thriller">Thriller</option>
+                                        <option value="Self-Help">Self-Help</option>
+                                        <option value="Poetry">Poetry</option>
+                                        <option value="History">History</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a genre.
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" placeholder="Write a brief description or summary of the book..." required></textarea>
+                                    <div class="invalid-feedback">
+                                        Description is required.
+                                    </div>
+                                </div>
+
+                                <!-- Image URL -->
+                                <div class="mb-3">
+                                    <label for="imageUrl" class="form-label">Book Cover Image URL</label>
+                                    <input type="url" class="form-control" id="imageUrl" name="imageUrl" placeholder="https://example.com/book-cover.jpg">
+                                    <small class="text-muted">Optional. Paste the URL of a book cover image.</small>
+                                    <div id="imagePreview" class="mt-2 d-none">
+                                        <img id="previewImage" src="" alt="Preview" class="img-thumbnail" style="max-width: 150px;">
+                                    </div>
+                                </div>
+
+                                <!-- Alert Messages -->
+                                <div id="successAlert" class="alert alert-success alert-dismissible fade show d-none">
+                                    <strong>Success!</strong> Book added successfully. Redirecting...
+                                </div>
+                                <div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none">
+                                    <strong>Error!</strong> <span id="errorMessage"></span>
+                                </div>
+
+                                <!-- Submit and Cancel Buttons -->
+                                <div class="d-grid gap-2 d-sm-flex">
+                                    <button type="submit" class="btn btn-primary btn-lg flex-sm-grow-1">Add Book</button>
+                                    <a href="books.html" class="btn btn-outline-secondary btn-lg flex-sm-grow-1">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="text-center text-white-50">
+                <p>&copy; 2026 BookHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script>
+        $(document).ready(function() {
+            // live validation for book fields
+            $('#title, #author, #description').on('input blur', function() {
+                if ($(this).val().trim()) {
+                    $(this).closest('.mb-3').find('.invalid-feedback').addClass('d-none');
+                }
+            });
+            $('#genre').on('change', function() {
+                if ($(this).val()) {
+                    $(this).closest('.mb-3').find('.invalid-feedback').addClass('d-none');
+                }
+            });
+
+            $('#addBookForm').on('submit', function(e) {
+                e.preventDefault();
+                validateAndAddBook();
+            });
+
+            // Image preview
+            $('#imageUrl').on('change', function() {
+                const url = $(this).val();
+                if (url) {
+                    $('#previewImage').attr('src', url);
+                    $('#imagePreview').removeClass('d-none');
+                } else {
+                    $('#imagePreview').addClass('d-none');
+                }
+            });
+        });
+
+        function validateAndAddBook() {
+            const title = $('#title').val().trim();
+            const author = $('#author').val().trim();
+            const genre = $('#genre').val();
+            const description = $('#description').val().trim();
+            const imageUrl = $('#imageUrl').val().trim();
+            let isValid = true;
+
+            // Reset alerts
+            $('#errorAlert').addClass('d-none');
+            $('#successAlert').addClass('d-none');
+
+            // Validate
+            if (!title) {
+                $('#errorMessage').text('Book title is required.');
+                $('#errorAlert').removeClass('d-none');
+                isValid = false;
+            }
+
+            if (!author) {
+                $('#errorMessage').text('Author name is required.');
+                $('#errorAlert').removeClass('d-none');
+                isValid = false;
+            }
+
+            if (!genre) {
+                $('#errorMessage').text('Please select a genre.');
+                $('#errorAlert').removeClass('d-none');
+                isValid = false;
+            }
+
+            if (!description) {
+                $('#errorMessage').text('Description is required.');
+                $('#errorAlert').removeClass('d-none');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Get current user
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const addedBy = currentUser ? currentUser.name : 'Anonymous';
+
+            // Create book object
+            const newBook = {
+                id: Date.now(),
+                title: title,
+                author: author,
+                genre: genre,
+                description: description,
+                imageUrl: imageUrl || 'https://via.placeholder.com/300x400?text=Book+Cover',
+                addedBy: addedBy,
+                addedDate: new Date().toISOString(),
+                rating: 0,
+                reviewCount: 0
+            };
+
+            // Get existing books
+            const books = getAllBooks();
+            books.push(newBook);
+            localStorage.setItem('books', JSON.stringify(books));
+
+            // If user is logged in, save to their profile
+            if (currentUser) {
+                const userBooks = JSON.parse(localStorage.getItem(`userBooks_${currentUser.id}`)) || [];
+                userBooks.push(newBook.id);
+                localStorage.setItem(`userBooks_${currentUser.id}`, JSON.stringify(userBooks));
+            }
+
+            // Show success message
+            $('#successAlert').removeClass('d-none');
+            setTimeout(() => {
+                window.location.href = 'books.html';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

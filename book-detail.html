@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - BookHub</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-reader"></i> BookHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-book.html">Add Recommendation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Book Detail Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Book Cover and Basic Info -->
+                <div class="col-md-4 mb-4">
+                    <img id="bookCover" src="" alt="Book Cover" class="img-fluid rounded shadow book-detail-cover">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h6 class="card-title">Book Information</h6>
+                            <p><strong>Author:</strong> <span id="bookAuthor"></span></p>
+                            <p><strong>Genre:</strong> <span id="bookGenre"></span></p>
+                            <p><strong>Added by:</strong> <span id="bookAddedBy"></span></p>
+                            <p><strong>Added on:</strong> <span id="bookDate"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book Details -->
+                <div class="col-md-8">
+                    <h1 id="bookTitle"></h1>
+                    
+                    <!-- Rating Section -->
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <h3 class="me-3"><span id="avgRating">0</span> <i class="fas fa-star text-warning"></i></h3>
+                            <div>
+                                <p class="mb-0"><strong id="reviewCount">0</strong> reviews</p>
+                                <small class="text-muted">Based on user reviews</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Description</h5>
+                            <p id="bookDescription"></p>
+                        </div>
+                    </div>
+
+                    <!-- Add Review Section -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Leave a Review</h5>
+                            
+                            <!-- Alert Messages -->
+                            <div id="reviewSuccessAlert" class="alert alert-success alert-dismissible fade show d-none">
+                                <strong>Success!</strong> Your review has been added.
+                            </div>
+                            <div id="reviewErrorAlert" class="alert alert-danger alert-dismissible fade show d-none">
+                                <strong>Error!</strong> <span id="reviewErrorMessage"></span>
+                            </div>
+
+                            <form id="reviewForm" novalidate>
+                                <!-- Rating -->
+                                <div class="mb-3">
+                                    <label class="form-label">Rating</label>
+                                    <div class="star-rating">
+                                        <i class="fas fa-star star" data-rating="1"></i>
+                                        <i class="fas fa-star star" data-rating="2"></i>
+                                        <i class="fas fa-star star" data-rating="3"></i>
+                                        <i class="fas fa-star star" data-rating="4"></i>
+                                        <i class="fas fa-star star" data-rating="5"></i>
+                                    </div>
+                                    <input type="hidden" id="reviewRating" value="0">
+                                </div>
+
+                                <!-- Review Text -->
+                                <div class="mb-3">
+                                    <label for="reviewText" class="form-label">Your Review</label>
+                                    <textarea class="form-control" id="reviewText" rows="4" placeholder="Share your thoughts about this book..." required></textarea>
+                                    <div class="invalid-feedback">
+                                        Please write a review.
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="row mt-5">
+                <div class="col-md-8 offset-md-4">
+                    <h3 class="mb-4">Reviews</h3>
+                    <div id="reviewsContainer">
+                        <!-- Reviews will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="text-center text-white-50">
+                <p>&copy; 2026 BookHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script>
+        let currentBookId = null;
+
+        $(document).ready(function() {
+            getBookIdFromURL();
+            loadBookDetails();
+            setupStarRating();
+            setupReviewForm();
+
+            // live validation for review text
+            $('#reviewText').on('input', function() {
+                if ($(this).val().trim()) {
+                    $(this).removeClass('is-invalid');
+                    $('#reviewErrorAlert').addClass('d-none');
+                }
+            });
+        });
+
+        function getBookIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            currentBookId = parseInt(params.get('id'));
+        }
+
+        function loadBookDetails() {
+            const books = getAllBooks();
+            const book = books.find(b => b.id === currentBookId);
+
+            if (!book) {
+                $('body').html('<div class="container mt-5"><h2>Book not found</h2><a href="books.html">Back to Books</a></div>');
+                return;
+            }
+
+            // Display book info
+            $('#bookTitle').text(book.title);
+            $('#bookAuthor').text(book.author);
+            $('#bookGenre').text(book.genre);
+            $('#bookDescription').text(book.description);
+            $('#bookCover').attr('src', book.imageUrl || 'https://via.placeholder.com/300x400?text=Book+Cover');
+            $('#bookAddedBy').text(book.addedBy || 'Anonymous');
+            $('#bookDate').text(new Date(book.addedDate).toLocaleDateString());
+
+            // Load and display reviews
+            loadReviews();
+        }
+
+        function loadReviews() {
+            const reviews = getReviewsForBook(currentBookId);
+            const reviewsContainer = $('#reviewsContainer');
+            reviewsContainer.empty();
+
+            if (reviews.length === 0) {
+                reviewsContainer.html('<p class="text-muted">No reviews yet. Be the first to review!</p>');
+                return;
+            }
+
+            // Calculate average rating
+            const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+            $('#avgRating').text(avgRating.toFixed(1));
+            $('#reviewCount').text(reviews.length);
+
+            reviews.forEach(review => {
+                const reviewDiv = `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="card-subtitle mb-1">${review.author}</h6>
+                                    <small class="text-muted">${new Date(review.date).toLocaleDateString()}</small>
+                                </div>
+                                <div class="text-warning">
+                                    ${'⭐'.repeat(review.rating)}
+                                </div>
+                            </div>
+                            <p class="card-text">${review.text}</p>
+                        </div>
+                    </div>
+                `;
+                reviewsContainer.append(reviewDiv);
+            });
+        }
+
+        function setupStarRating() {
+            $('.star-rating .star').on('click', function() {
+                const rating = $(this).data('rating');
+                $('#reviewRating').val(rating);
+                
+                // Update visual
+                $('.star-rating .star').each(function() {
+                    if ($(this).data('rating') <= rating) {
+                        $(this).addClass('active');
+                    } else {
+                        $(this).removeClass('active');
+                    }
+                });
+            });
+
+            // Hover effect
+            $('.star-rating .star').on('mouseover', function() {
+                const rating = $(this).data('rating');
+                $('.star-rating .star').each(function() {
+                    if ($(this).data('rating') <= rating) {
+                        $(this).addClass('hover');
+                    } else {
+                        $(this).removeClass('hover');
+                    }
+                });
+            });
+
+            $('.star-rating').on('mouseout', function() {
+                $('.star-rating .star').removeClass('hover');
+            });
+        }
+
+        function setupReviewForm() {
+            $('#reviewForm').on('submit', function(e) {
+                e.preventDefault();
+                submitReview();
+            });
+        }
+
+        function submitReview() {
+            const rating = parseInt($('#reviewRating').val());
+            const text = $('#reviewText').val().trim();
+            let isValid = true;
+
+            // Reset alerts
+            $('#reviewSuccessAlert').addClass('d-none');
+            $('#reviewErrorAlert').addClass('d-none');
+
+            // Validate
+            if (rating === 0) {
+                $('#reviewErrorMessage').text('Please select a rating.');
+                $('#reviewErrorAlert').removeClass('d-none');
+                isValid = false;
+            }
+
+            if (!text) {
+                $('#reviewErrorMessage').text('Please write a review.');
+                $('#reviewErrorAlert').removeClass('d-none');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Get current user
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const author = currentUser ? currentUser.name : 'Anonymous';
+
+            // Add review
+            const reviews = getReviewsForBook(currentBookId) || [];
+            const newReview = {
+                id: Date.now(),
+                bookId: currentBookId,
+                author: author,
+                rating: rating,
+                text: text,
+                date: new Date().toISOString()
+            };
+
+            reviews.push(newReview);
+            localStorage.setItem(`reviews_${currentBookId}`, JSON.stringify(reviews));
+
+            // Update book rating
+            const books = getAllBooks();
+            const bookIndex = books.findIndex(b => b.id === currentBookId);
+            if (bookIndex !== -1) {
+                const allReviews = reviews;
+                const avgRating = allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length;
+                books[bookIndex].rating = avgRating;
+                books[bookIndex].reviewCount = allReviews.length;
+                localStorage.setItem('books', JSON.stringify(books));
+            }
+
+            // Show success message
+            $('#reviewSuccessAlert').removeClass('d-none');
+            $('#reviewForm')[0].reset();
+            $('#reviewRating').val(0);
+            $('.star-rating .star').removeClass('active');
+
+            // Reload reviews
+            setTimeout(() => {
+                loadReviews();
+            }, 1000);
+        }
+
+        function getReviewsForBook(bookId) {
+            return JSON.parse(localStorage.getItem(`reviews_${bookId}`)) || [];
+        }
+    </script>
+</body>
+</html>
