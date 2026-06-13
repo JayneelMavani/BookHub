@@ -1,7 +1,3 @@
-// ========================================
-// BookHub - Main JavaScript File
-// ========================================
-
 /**
  * Initialize sample books on first load
  * This data is stored in browser localStorage
