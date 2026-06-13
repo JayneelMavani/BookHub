@@ -27,22 +27,13 @@
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="books.html">Books</a>
+                        <a class="nav-link" href="/pages/books.html">Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="add-book.html">Add Recommendation</a>
+                        <a class="nav-link" href="/pages/add-book.html">Add Recommendation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.html">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="register.html">Register</a>
+                        <a class="nav-link" href="/pages/about.html">About</a>
                     </li>
                 </ul>
                 <!-- Search Bar -->
@@ -59,8 +50,8 @@
         <div class="container text-center">
             <h1 class="display-4 fw-bold mb-4">Welcome to BookHub</h1>
             <p class="lead mb-4">Discover amazing books recommended by the community. Share your favorite reads and join book lovers worldwide.</p>
-            <a href="books.html" class="btn btn-light btn-lg me-2">Browse Books</a>
-            <a href="add-book.html" class="btn btn-outline-light btn-lg">Add Your Recommendation</a>
+            <a href="/pages/books.html" class="btn btn-light btn-lg me-2">Browse Books</a>
+            <a href="/pages/add-book.html" class="btn btn-outline-light btn-lg">Add Your Recommendation</a>
         </div>
     </section>
 
@@ -89,7 +80,7 @@
         <div class="container text-center">
             <h2 class="mb-4">Have a Book to Recommend?</h2>
             <p class="lead mb-4">Share your favorite books with our community and help others discover great reads!</p>
-            <a href="add-book.html" class="btn btn-light btn-lg">Add Your Book Now</a>
+            <a href="/pages/add-book.html" class="btn btn-light btn-lg">Add Your Book Now</a>
         </div>
     </section>
 
@@ -105,8 +96,8 @@
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="index.html" class="text-white-50">Home</a></li>
-                        <li><a href="books.html" class="text-white-50">Books</a></li>
-                        <li><a href="about.html" class="text-white-50">About</a></li>
+                        <li><a href="/pages/books.html" class="text-white-50">Books</a></li>
+                        <li><a href="/pages/about.html" class="text-white-50">About</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -163,7 +154,7 @@
                                 <div class="mb-3">
                                     <span class="badge bg-warning text-dark">${(book.rating || 0).toFixed(1)} ⭐</span>
                                 </div>
-                                <a href="book-detail.html?id=${book.id}" class="btn btn-primary mt-auto">View Details</a>
+                                <a href="pages/book-detail.html?id=${book.id}" class="btn btn-primary mt-auto">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -177,7 +168,7 @@
             e.preventDefault();
             const query = $('#navSearchInput').val();
             if (query) {
-                window.location.href = `books.html?search=${encodeURIComponent(query)}`;
+                window.location.href = `pages/books.html?search=${encodeURIComponent(query)}`;
             }
         });
     </script>

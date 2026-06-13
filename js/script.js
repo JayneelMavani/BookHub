@@ -465,7 +465,7 @@ function setCurrentUser(user) {
  */
 function logout() {
     localStorage.removeItem('currentUser');
-    window.location.href = 'login.html';
+    window.location.href = window.location.pathname.includes('/pages/') ? '../index.html' : 'index.html';
 }
 
 /**

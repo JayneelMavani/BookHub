@@ -404,7 +404,7 @@
         }
 
         // 9. How to use BookHub
-        if (/\b(how to|add book|write review|browse|use bookhub|navigate|profile|sign up|register|login)\b/i.test(msg)) {
+        if (/\b(how to|add book|write review|browse|use bookhub|navigate|profile)\b/i.test(msg)) {
             return "Here's a quick guide to BookHub! 🗺️\n\n" +
                 "• **Browse Books** — Head to the Books page to explore the catalog. You can filter by genre, rating, and sort results.\n" +
                 "• **Add a Book** — Click \"Add Recommendation\" in the navbar to share a book you love with the community.\n" +

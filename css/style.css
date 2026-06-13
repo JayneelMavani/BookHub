@@ -173,13 +173,6 @@ a:hover {
     margin-top: 0.25rem;
 }
 
-/* Auth Section */
-.auth-section {
-    min-height: calc(100vh - 300px);
-    display: flex;
-    align-items: center;
-}
-
 /* Star Rating */
 .star-rating {
     font-size: 2rem;
