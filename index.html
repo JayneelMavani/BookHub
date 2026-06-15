@@ -10,6 +10,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Dark-mode: set theme before first paint to prevent flash -->
+    <script>
+        (function() {
+            const t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -41,6 +48,10 @@
                     <input class="form-control me-2" type="text" id="navSearchInput" placeholder="Search books...">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </form>
+                <!-- Theme Toggle -->
+                <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle dark / light mode" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -120,6 +131,27 @@
     <script src="js/script.js"></script>
     <script src="js/chatbot.js"></script>
     <script>
+        // ── Theme toggle ──────────────────────────────────────────
+        (function() {
+            function applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                const icon = document.querySelector('#themeToggleBtn i');
+                if (icon) {
+                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+            // Apply on load (after DOM ready)
+            document.addEventListener('DOMContentLoaded', function() {
+                applyTheme(localStorage.getItem('theme') || 'light');
+                document.getElementById('themeToggleBtn').addEventListener('click', function() {
+                    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    localStorage.setItem('theme', next);
+                    applyTheme(next);
+                });
+            });
+        })();
+        // ─────────────────────────────────────────────────────────
+
         // Load featured and popular books on home page
         $(document).ready(function() {
             loadFeaturedBooks();

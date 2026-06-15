@@ -8,6 +8,86 @@
     --dark-color: #343a40;
     --border-radius: 0.5rem;
     --transition: all 0.3s ease;
+
+    /* Light theme tokens */
+    --bg:           #ffffff;
+    --bg-alt:       #f8f9fa;
+    --surface:      #ffffff;
+    --text:         #333333;
+    --text-muted:   #6c757d;
+    --heading:      #111827;
+    --border:       #e0e0e0;
+    --input-bg:     #ffffff;
+    --input-text:   #333333;
+    --card-shadow:  rgba(0,0,0,0.08);
+    --card-shadow-hover: rgba(0,0,0,0.15);
+
+    /* Chatbot light tokens */
+    --cb-window:    #ffffff;
+    --cb-msgs:      #f8f9fb;
+    --cb-bot-bg:    #ffffff;
+    --cb-bot-text:  #333333;
+    --cb-qa-bg:     #ffffff;
+    --cb-qa-border: #eef0f5;
+    --cb-btn-bg:    #f8f9fb;
+    --cb-btn-border:#dde1e9;
+    --cb-btn-text:  #4a5568;
+    --cb-input-bg:  #f8f9fb;
+    --cb-input-brd: #dde1e9;
+    --cb-input-txt: #333333;
+}
+
+/* ─── Dark theme overrides ─── */
+[data-theme="dark"] {
+    --bg:           #0f1117;
+    --bg-alt:       #161b27;
+    --surface:      #1c2233;
+    --text:         #cbd5e1;
+    --text-muted:   #8892a4;
+    --heading:      #f1f5f9;
+    --border:       #2d3748;
+    --input-bg:     #1c2233;
+    --input-text:   #e2e8f0;
+    --card-shadow:  rgba(0,0,0,0.4);
+    --card-shadow-hover: rgba(0,0,0,0.55);
+
+    /* Chatbot dark tokens */
+    --cb-window:    #1c2233;
+    --cb-msgs:      #0f1117;
+    --cb-bot-bg:    #242d42;
+    --cb-bot-text:  #cbd5e1;
+    --cb-qa-bg:     #1c2233;
+    --cb-qa-border: #2d3748;
+    --cb-btn-bg:    #242d42;
+    --cb-btn-border:#3d4f6a;
+    --cb-btn-text:  #94a3b8;
+    --cb-input-bg:  #242d42;
+    --cb-input-brd: #3d4f6a;
+    --cb-input-txt: #e2e8f0;
+}
+
+/* ─── Global theme transitions ─── */
+body,
+.card,
+.navbar,
+.chatbot-window,
+.chatbot-messages,
+.chatbot-msg-bubble-bot,
+.chatbot-quick-actions,
+.chatbot-input-area,
+.chatbot-input,
+.chatbot-quick-btn,
+.form-control,
+.form-select,
+.modal-content,
+.modal-header,
+.nav-tabs,
+.nav-tabs .nav-link,
+footer {
+    transition: background-color 0.25s ease,
+                color 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
 }
 
 html,
@@ -17,8 +97,8 @@ body {
 }
 
 body {
-    background-color: #ffffff;
-    color: #333;
+    background-color: var(--bg);
+    color: var(--text);
     line-height: 1.6;
 }
 
@@ -30,8 +110,78 @@ h4,
 h5,
 h6 {
     font-weight: 600;
-    color: #000;
+    color: var(--heading);
 }
+
+/* ─── Theme Toggle Button ─── */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.78);
+    font-size: 1.1rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+    color: var(--warning-color);
+    background: rgba(255,255,255,0.12);
+    transform: rotate(20deg) scale(1.1);
+}
+
+.theme-toggle-btn i {
+    transition: transform 0.4s ease;
+}
+
+/* ─── Dark-mode section backgrounds ─── */
+[data-theme="dark"] .bg-light,
+[data-theme="dark"] section.py-5.bg-light {
+    background-color: var(--bg-alt) !important;
+}
+
+[data-theme="dark"] .bg-dark {
+    background-color: #0a0d14 !important;
+}
+
+[data-theme="dark"] footer.bg-dark {
+    background-color: #0a0d14 !important;
+}
+
+/* ─── Dark-mode text helpers ─── */
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .card-text.text-muted {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+    color: var(--text-muted) !important;
+}
+
+/* ─── Dark-mode card header ─── */
+[data-theme="dark"] .card-header.bg-light {
+    background-color: var(--surface) !important;
+    border-color: var(--border) !important;
+}
+
+/* ─── Dark-mode about contact box ─── */
+[data-theme="dark"] .bg-light.p-5.rounded {
+    background-color: var(--bg-alt) !important;
+}
+
+/* ─── About / Contact text in dark ─── */
+[data-theme="dark"] .bg-light p,
+[data-theme="dark"] .bg-light strong {
+    color: var(--text);
+}
+
 
 a {
     color: var(--primary-color);
@@ -88,13 +238,15 @@ a:hover {
 /* Cards */
 .card {
     border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--card-shadow);
     transition: var(--transition);
     border-radius: var(--border-radius);
+    background-color: var(--surface);
+    color: var(--text);
 }
 
 .card:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 16px var(--card-shadow-hover);
     transform: translateY(-4px);
 }
 
@@ -104,7 +256,7 @@ a:hover {
 }
 
 .book-card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px var(--card-shadow-hover);
 }
 
 .book-cover {
@@ -150,19 +302,23 @@ a:hover {
 .form-control,
 .form-select {
     border-radius: var(--border-radius);
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border);
+    background-color: var(--input-bg);
+    color: var(--input-text);
     transition: var(--transition);
 }
 
 .form-control:focus,
 .form-select:focus {
     border-color: var(--primary-color);
+    background-color: var(--input-bg);
+    color: var(--input-text);
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .form-label {
     font-weight: 500;
-    color: #333;
+    color: var(--text);
     margin-bottom: 0.5rem;
 }
 
@@ -314,26 +470,28 @@ footer h5 {
 .modal-content {
     border-radius: var(--border-radius);
     border: none;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 30px var(--card-shadow);
+    background-color: var(--surface);
+    color: var(--text);
 }
 
 .modal-header {
-    border-bottom: 1px solid #e0e0e0;
-    background-color: var(--light-color);
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg-alt);
 }
 
 .modal-title {
     font-weight: 600;
-    color: #333;
+    color: var(--heading);
 }
 
 /* Tabs */
 .nav-tabs {
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 2px solid var(--border);
 }
 
 .nav-tabs .nav-link {
-    color: #666;
+    color: var(--text-muted);
     border: none;
     border-bottom: 3px solid transparent;
     transition: var(--transition);
@@ -358,16 +516,16 @@ footer h5 {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--bg-alt);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--border);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--primary-color);
 }
 
 /* Responsive Design */
@@ -658,16 +816,17 @@ hr {
     right: 28px;
     width: 380px;
     height: 520px;
-    background: #fff;
+    background: var(--cb-window);
     border-radius: 16px;
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 12px 48px var(--card-shadow), 0 0 0 1px rgba(0, 0, 0, 0.06);
     z-index: 9998;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     opacity: 0;
     transform: translateY(20px) scale(0.95);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease,
+                background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .chatbot-window-open {
@@ -770,7 +929,7 @@ hr {
     flex: 1;
     overflow-y: auto;
     padding: 18px 14px;
-    background: #f8f9fb;
+    background: var(--cb-msgs);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -846,14 +1005,18 @@ hr {
 }
 
 .chatbot-msg-bubble-bot {
-    background: white;
-    color: #333;
+    background: var(--cb-bot-bg);
+    color: var(--cb-bot-text);
     border-bottom-left-radius: 4px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 .chatbot-msg-bubble-bot strong {
     color: #0056b3;
+}
+
+[data-theme="dark"] .chatbot-msg-bubble-bot strong {
+    color: #60a5fa;
 }
 
 .chatbot-bullet {
@@ -905,8 +1068,8 @@ hr {
     gap: 6px;
     padding: 8px 14px;
     overflow-x: auto;
-    background: #fff;
-    border-top: 1px solid #eef0f5;
+    background: var(--cb-qa-bg);
+    border-top: 1px solid var(--cb-qa-border);
     flex-shrink: 0;
 }
 
@@ -918,9 +1081,9 @@ hr {
     flex-shrink: 0;
     padding: 5px 12px;
     border-radius: 20px;
-    border: 1px solid #dde1e9;
-    background: #f8f9fb;
-    color: #4a5568;
+    border: 1px solid var(--cb-btn-border);
+    background: var(--cb-btn-bg);
+    color: var(--cb-btn-text);
     font-size: 0.78rem;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -939,8 +1102,8 @@ hr {
 /* Input Area */
 .chatbot-input-area {
     padding: 12px 14px;
-    background: #fff;
-    border-top: 1px solid #eef0f5;
+    background: var(--cb-window);
+    border-top: 1px solid var(--cb-qa-border);
     flex-shrink: 0;
 }
 
@@ -953,19 +1116,20 @@ hr {
 .chatbot-input {
     flex: 1;
     padding: 10px 16px;
-    border: 1.5px solid #dde1e9;
+    border: 1.5px solid var(--cb-input-brd);
     border-radius: 24px;
     font-size: 0.88rem;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    background: #f8f9fb;
-    color: #333;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease,
+                background-color 0.25s ease, color 0.25s ease;
+    background: var(--cb-input-bg);
+    color: var(--cb-input-txt);
 }
 
 .chatbot-input:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.12);
-    background: #fff;
+    background: var(--cb-window);
 }
 
 .chatbot-input::placeholder {
